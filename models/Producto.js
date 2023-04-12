@@ -61,4 +61,6 @@ ProductoSchema.pre('save', function (next) {
     });
   });
 
-module.exports = mongoose.model('Producto', ProductoSchema);
+const Producto = mongoose.model('Producto', ProductoSchema);
+
+module.exports = Producto;
