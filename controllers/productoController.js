@@ -30,35 +30,6 @@ exports.obtenerProductos = async (req, res) => {
 
 }
 
-exports.actualizarProducto = async (req, res) => {
-
-    try {
-        const { nombre, apPaterno, apMaterno,edad,genero,correo,telefono,ciudad,cargo } = req.body;
-        let producto = await Producto.findById(req.params.id);
-
-        if(!producto) {
-            res.status(404).json({ msg: 'No existe el producto' })
-        }
-
-        producto.nombre = nombre;
-        producto.apPaterno = apPaterno;
-        producto.apMaterno = apMaterno;
-        producto.edad = edad;
-        producto.genero = genero;
-        producto.correo = correo;
-        producto.telefono = telefono;
-        producto.ciudad = ciudad;
-        producto.cargo = cargo;
-
-        producto = await Producto.findOneAndUpdate({ _id: req.params.id },producto, { new: true} )
-        res.json(producto);
-        
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error');
-    }
-}
-
 
 exports.obtenerProducto = async (req, res) => {
 
@@ -97,3 +68,24 @@ exports.eliminarProducto = async (req, res) => {
 
 /**/
 
+exports.ordenarGenero = async (req,res) => {
+    try{
+        const ordenarProducto = await Producto.find({"genero":"H"});
+        res.json(ordenarProducto)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
+exports.ordenarGeneroF = async (req,res) => {
+    try{
+        const ordenarProducto = await Producto.find({"genero":"F"});
+        res.json(ordenarProducto)
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}

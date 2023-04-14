@@ -41,9 +41,9 @@ const ProductoSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    AreaInterez: {
-        type: Date,
-        default: Date.now()
+    areaInt: {
+        type: [],
+        required: true
     }
 });
 
