@@ -94,3 +94,6 @@ exports.eliminarProducto = async (req, res) => {
         res.status(500).send('Hubo un error');
     }
 }
+
+/**/
+

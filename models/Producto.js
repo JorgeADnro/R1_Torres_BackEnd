@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const ProductoSchema = mongoose.Schema({
-    Folio: {
-        type: Number,
-        unique: true,
-        required: true,
-        default: 1
-    },
     nombre: {
         type: String,
         required: true
@@ -46,21 +40,12 @@ const ProductoSchema = mongoose.Schema({
     fechaCreacion: {
         type: Date,
         default: Date.now()
+    },
+    AreaInterez: {
+        type: Date,
+        default: Date.now()
     }
 });
 
-ProductoSchema.pre('save', function (next) {
-    var doc = this;
-    Producto.findOne().sort('-Folio').exec(function (err, product) {
-      if (product) {
-        doc.Folio = product.Folio + 1;
-      } else {
-        doc.Folio = 1;
-      }
-      next();
-    });
-  });
 
-const Producto = mongoose.model('Producto', ProductoSchema);
-
-module.exports = Producto;
+module.exports = mongoose.model('Producto', ProductoSchema);
