@@ -90,3 +90,15 @@ exports.obtenerProductosPorArea = async (req, res) => {
     }
 }
 
+exports.obtenerProductosPorAreaYGenero = async (req, res) => {
+    const { areaInt, genero } = req.params;
+    
+    try {
+        const productos = await Producto.find({ areaInt, genero });
+        res.json(productos);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
