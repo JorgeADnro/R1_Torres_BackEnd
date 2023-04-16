@@ -66,26 +66,15 @@ exports.eliminarProducto = async (req, res) => {
     }
 }
 
-/**/
-
-exports.ordenarGenero = async (req,res) => {
-    try{
-        const ordenarProducto = await Producto.find({"genero":"H"});
-        res.json(ordenarProducto)
-    }
-    catch (error) {
+exports.obtenerProductosPorGenero = async (req, res) => {
+    const { genero } = req.params;
+    
+    try {
+        const productos = await Producto.find({ genero });
+        res.json(productos);
+    } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
     }
 }
 
-exports.ordenarGeneroF = async (req,res) => {
-    try{
-        const ordenarProducto = await Producto.find({"genero":"F"});
-        res.json(ordenarProducto)
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send('Hubo un error');
-    }
-}

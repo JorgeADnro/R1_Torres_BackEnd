@@ -9,5 +9,6 @@ router.post('/', productoController.crearProducto);
 router.get('/', productoController.obtenerProductos);
 router.get('/:id', productoController.obtenerProducto);
 router.delete('/:id', productoController.eliminarProducto);
+router.get('/genero/:genero', productoController.obtenerProductosPorGenero);
 
 module.exports = router;

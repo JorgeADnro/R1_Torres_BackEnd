@@ -19,6 +19,7 @@ const ProductoSchema = mongoose.Schema({
     },
     genero: {
         type: String,
+        enum: ['H', 'M'],
         required: true
     },
     correo: {
