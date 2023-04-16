@@ -78,3 +78,15 @@ exports.obtenerProductosPorGenero = async (req, res) => {
     }
 }
 
+exports.obtenerProductosPorArea = async (req, res) => {
+    const { areaInt } = req.params;
+    
+    try {
+        const productos = await Producto.find({ areaInt });
+        res.json(productos);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
