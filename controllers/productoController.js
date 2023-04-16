@@ -1,15 +1,12 @@
 const Producto = require("../models/Producto");
 
 exports.crearProducto = async (req, res) => {
-
     try {
         let producto;
-
         // Creamos nuestro producto
         producto = new Producto(req.body);
         await producto.save();
-        res.send(producto);
-        
+        res.send(producto); 
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -17,31 +14,23 @@ exports.crearProducto = async (req, res) => {
 }
 
 exports.obtenerProductos = async (req, res) => {
-
     try {
-
         const productos = await Producto.find();
-        res.json(productos)
-        
+        res.json(productos) 
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
     }
-
 }
 
 
 exports.obtenerProducto = async (req, res) => {
-
     try {
         let producto = await Producto.findById(req.params.id);
-
         if(!producto) {
             res.status(404).json({ msg: 'No existe el producto' })
         }
-       
         res.json(producto);
-        
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -49,17 +38,13 @@ exports.obtenerProducto = async (req, res) => {
 }
 
 exports.eliminarProducto = async (req, res) => {
-
     try {
         let producto = await Producto.findById(req.params.id);
-
         if(!producto) {
             res.status(404).json({ msg: 'No existe el producto' })
         }
-       
         await Producto.findOneAndRemove({ _id: req.params.id })
         res.json({ msg: 'Producto eliminado con exito' });
-        
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -68,7 +53,6 @@ exports.eliminarProducto = async (req, res) => {
 
 exports.obtenerProductosPorGenero = async (req, res) => {
     const { genero } = req.params;
-    
     try {
         const productos = await Producto.find({ genero });
         res.json(productos);
@@ -80,7 +64,6 @@ exports.obtenerProductosPorGenero = async (req, res) => {
 
 exports.obtenerProductosPorArea = async (req, res) => {
     const { areaInt } = req.params;
-    
     try {
         const productos = await Producto.find({ areaInt });
         res.json(productos);
@@ -92,7 +75,6 @@ exports.obtenerProductosPorArea = async (req, res) => {
 
 exports.obtenerProductosPorAreaYGenero = async (req, res) => {
     const { areaInt, genero } = req.params;
-    
     try {
         const productos = await Producto.find({ areaInt, genero });
         res.json(productos);
