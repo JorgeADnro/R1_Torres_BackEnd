@@ -73,6 +73,17 @@ exports.obtenerProductosPorArea = async (req, res) => {
     }
 }
 
+exports.obtenerProductosPorFecha = async (req, res) => {
+    const { fechaCreacion } = req.params;
+    try {
+        const productos = await Producto.find({ fechaCreacion });
+        res.json(productos);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');
+    }
+}
+
 exports.obtenerProductosPorAreaYGenero = async (req, res) => {
     const { areaInt, genero } = req.params;
     try {
@@ -83,4 +94,19 @@ exports.obtenerProductosPorAreaYGenero = async (req, res) => {
         res.status(500).send('Hubo un error');
     }
 }
+
+exports.obtenerProductosPorAreaYFecha = async (req, res) => {
+    const { areaInt, fechaCreacion } = req.params;
+    try {
+      const fecha = new Date(fechaCreacion);
+      const productos = await Producto.find({ areaInt, fechaCreacion: fecha });
+      res.json(productos);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send('Hubo un error');
+    }
+  }
+  
+  
+  
 

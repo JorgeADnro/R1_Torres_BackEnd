@@ -40,8 +40,8 @@ const ProductoSchema = mongoose.Schema({
     },
     fechaCreacion: {
         type: Date,
-        default: Date.now()
-    },
+        default: new Date().toISOString().slice(0, 10)
+      },
     areaInt: {
         type: [],
         required: true

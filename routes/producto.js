@@ -12,5 +12,7 @@ router.delete('/:id', productoController.eliminarProducto);
 router.get('/genero/:genero', productoController.obtenerProductosPorGenero);
 router.get('/areaInt/:areaInt', productoController.obtenerProductosPorArea);
 router.get('/areaInt/:areaInt/genero/:genero', productoController.obtenerProductosPorAreaYGenero);
+router.get('/areaInt/:areaInt/fechaCreacion/:fechaCreacion', productoController.obtenerProductosPorAreaYFecha);
+router.get('/fechaCreacion/:fechaCreacion', productoController.obtenerProductosPorFecha);
 
 module.exports = router;
