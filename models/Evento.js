@@ -20,5 +20,9 @@ const EventoSchema = mongoose.Schema({
 
 });
 
-
+EventoSchema.methods.actualizarCupo = async function () {
+    const productosAsignados = await Producto.countDocuments({evento: this._id});
+    this.cupo = this.cupoMaximo - productosAsignados;
+    await this.save();
+  }
 module.exports = mongoose.model('Evento', EventoSchema);

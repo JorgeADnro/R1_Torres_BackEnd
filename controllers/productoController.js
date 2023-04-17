@@ -107,6 +107,30 @@ exports.obtenerProductosPorAreaYFecha = async (req, res) => {
     }
   }
   
+  exports.asignarEvento = async (req, res) => {
+    const { idProducto, idEvento } = req.params;
   
+    try {
+      const producto = await Producto.findById(idProducto);
+      const evento = await Evento.findById(idEvento);
+  
+      if (!producto || !evento) {
+        return res.status(404).send({mensaje: "Producto o evento no encontrado"});
+      }
+  
+      if (evento.cupo <= 0) {
+        return res.status(400).send({mensaje: "Evento sin cupo disponible"});
+      }
+  
+      producto.evento = evento._id;
+      await producto.save();
+  
+      await evento.actualizarCupo();
+  
+      res.status(200).send({mensaje: "Producto asignado al evento correctamente"});
+    } catch (error) {
+      res.status(500).send({mensaje: "Error al asignar evento al producto"});
+    }
+  }
   
 
